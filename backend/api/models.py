@@ -20,6 +20,7 @@ class Game(models.Model):
     release_year = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     genre = models.ForeignKey(Genre, on_delete=models.PROTECT, related_name='games')
+    ai_summary = models.TextField(blank = True, default = '')
 
     def __str__(self):
         return self.title
