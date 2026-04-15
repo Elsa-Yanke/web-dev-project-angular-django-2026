@@ -1,7 +1,36 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from api.models import Game
+
+from .models import Game, Genre, Review
+
 User = get_user_model()
+
+
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ['id', 'name']
+
+
+class GameSerializer(serializers.ModelSerializer):
+    genre = GenreSerializer(read_only=True)
+    genre_id = serializers.PrimaryKeyRelatedField(
+        queryset=Genre.objects.all(), source='genre', write_only=True
+    )
+
+    class Meta:
+        model = Game
+        fields = ['id', 'title', 'description', 'release_year', 'price', 'genre', 'genre_id', 'ai_summary']
+        read_only_fields = ['ai_summary']
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Review
+        fields = ['id', 'game', 'user', 'text', 'is_positive', 'created_at']
+        read_only_fields = ['user', 'created_at']
 
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)
@@ -31,8 +60,3 @@ class RegisterSerializer(serializers.Serializer):
         user.set_password(password)
         user.save()
         return user
-    
-class GameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Game
-        fields = ['id', 'title', 'description', 'release_year', 'price', 'genre', 'ai_summary']

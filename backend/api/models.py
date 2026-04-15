@@ -20,7 +20,7 @@ class Game(models.Model):
     release_year = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     genre = models.ForeignKey(Genre, on_delete=models.PROTECT, related_name='games')
-    ai_summary = models.TextField(blank = True, default = '')
+    ai_summary = models.TextField(blank=True, default='')
 
     def __str__(self):
         return self.title
@@ -30,10 +30,22 @@ class Review(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     text = models.TextField()
+    is_positive = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Review by {self.user.username} for {self.game.title}"
+
+
+class SteamReview(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='steam_reviews')
+    text = models.TextField()
+    is_positive = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        sentiment = 'positive' if self.is_positive else 'negative'
+        return f"Steam {sentiment} review for {self.game.title}"
 
 
 class UserGame(models.Model):
