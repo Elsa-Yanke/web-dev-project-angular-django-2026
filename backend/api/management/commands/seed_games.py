@@ -31,7 +31,6 @@ class Command(BaseCommand):
                 continue
 
     def _process_game(self, app_id):
-        # 1. Fetch game details
         detail_resp = requests.get(
             'https://store.steampowered.com/api/appdetails',
             params={'appids': app_id, 'l': 'english', 'cc': 'kz'},
@@ -46,20 +45,16 @@ class Command(BaseCommand):
         title = info['name']
         description = info.get('short_description', '')
 
-        # Price (Steam returns in cents, free games have no price_overview)
         price_overview = info.get('price_overview')
         price = round(price_overview['final'] / 100, 2) if price_overview else 0.00
 
-        # Release year
         release_date_str = info.get('release_date', {}).get('date', '')
         release_year = self._parse_year(release_date_str)
 
-        # Genre (take first one)
         genres = info.get('genres', [])
         genre_name = genres[0]['description'] if genres else 'Other'
         genre, _ = Genre.objects.get_or_create(name=genre_name)
 
-        # 2. Create or update game
         game, created = Game.objects.get_or_create(
             title=title,
             defaults={
@@ -76,7 +71,6 @@ class Command(BaseCommand):
         action = 'Created' if created else 'Found'
         self.stdout.write(f'  {action}: {title}')
 
-        # 3. Fetch reviews from Steam API
         review_resp = requests.get(
             f'https://store.steampowered.com/appreviews/{app_id}',
             params={
@@ -103,7 +97,6 @@ class Command(BaseCommand):
             for text in negative_texts
         ])
 
-        # 5. Generate and save AI summary inline (no signal needed here)
         game.ai_summary = generate_summary(positive_texts, negative_texts)
         game.save(update_fields=['ai_summary'])
 
