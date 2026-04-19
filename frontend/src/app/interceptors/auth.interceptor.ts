@@ -22,8 +22,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      // Only auto-logout if the token itself is invalid/expired,
-      // not on every 401 (which could be a CORS preflight issue)
       if (error.status === 401 && token) {
         authService.logout();
       }

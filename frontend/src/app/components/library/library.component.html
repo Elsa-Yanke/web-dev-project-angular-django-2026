@@ -24,7 +24,7 @@
   <div class="game-grid">
     @for (entry of filteredEntries(); track entry.id) {
       <div class="card" [attr.data-status]="entry.status">
-        <!-- Cover image -->
+
         <a [routerLink]="['/games', entry.game.id]" class="card-thumb-link">
           <div class="card-thumb">
             @if (coverSrc(entry)) {

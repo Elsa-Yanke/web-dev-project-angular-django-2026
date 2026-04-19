@@ -14,7 +14,6 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   mode = signal<'login' | 'register'>('login');
 
-  // Two-way bound with [(ngModel)]
   loginUsername = '';
   loginPassword = '';
   loginError = signal('');

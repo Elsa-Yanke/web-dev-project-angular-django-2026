@@ -1,13 +1,11 @@
 <div class="auth-wrapper">
   <div class="login-card">
 
-    <!-- Tab switcher -->
     <div class="tabs">
       <button class="tab-btn" [class.active]="mode() === 'login'" (click)="switchMode('login')">Sign In</button>
       <button class="tab-btn" [class.active]="mode() === 'register'" (click)="switchMode('register')">Register</button>
     </div>
 
-    <!-- ── LOGIN ── -->
     @if (mode() === 'login') {
       <h2>Welcome back</h2>
       <p>Sign in to your account</p>
@@ -26,8 +24,6 @@
       </div>
       <button type="button" class="btn-login" (click)="login()">Sign In</button>
     }
-
-    <!-- ── REGISTER ── -->
     @if (mode() === 'register') {
       <h2>Create account</h2>
       <p>Join GameLib today</p>

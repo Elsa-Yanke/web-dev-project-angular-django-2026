@@ -1,10 +1,9 @@
-/* Белое выделение текста */
+
 ::selection {
   background: #ffffff !important;
   color: #000000 !important;
 }
 
-/* Контейнер формы */
 .review-form {
   background: #1a1d26;
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -20,7 +19,6 @@
   margin-bottom: 20px;
 }
 
-/* Группы ввода */
 .form-group {
   margin-bottom: 20px;
 }
@@ -47,7 +45,6 @@
   border-color: #6c5ce7;
 }
 
-/* Чекбокс */
 .checkbox-container {
   display: flex;
   align-items: center;
@@ -56,7 +53,6 @@
   color: #fff;
 }
 
-/* Карточка отзыва */
 .review-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -77,7 +73,6 @@
   margin-bottom: 12px;
 }
 
-/* Аватар (первые две буквы имени) */
 .avatar {
   width: 36px;
   height: 36px;
@@ -112,10 +107,9 @@
 .review-text {
   color: #cbd5e0;
   line-height: 1.6;
-  white-space: pre-wrap; /* Сохраняет переносы строк */
+  white-space: pre-wrap; 
 }
 
-/* Кнопки */
 .btn {
   padding: 10px 20px;
   border-radius: 8px;
@@ -146,7 +140,6 @@
   color: white;
 }
 
-/* Сообщения об ошибках и успехе */
 .error-msg, .success-msg {
   margin-top: 15px;
   padding: 10px;
@@ -157,7 +150,6 @@
 .error-msg { background: rgba(245, 101, 101, 0.1); color: #f56565; }
 .success-msg { background: rgba(72, 187, 120, 0.1); color: #48bb78; }
 
-/* Пустое состояние */
 .empty-state {
   text-align: center;
   padding: 40px;

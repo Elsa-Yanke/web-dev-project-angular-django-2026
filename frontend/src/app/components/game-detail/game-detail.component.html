@@ -1,7 +1,6 @@
 <div class="detail-container">
   @if (game(); as g) {
 
-    <!-- ── HERO BANNER ── -->
     <div class="hero-banner" [style.background-image]="coverSrc(g) ? 'url(' + coverSrc(g) + ')' : 'none'">
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -39,11 +38,9 @@
       </div>
     </div>
 
-    <!-- ── MAIN GRID ── -->
     <div class="content-grid">
       <div class="main-info">
 
-        <!-- Personal note (only if in library) -->
         @if (libraryEntry()) {
           <section class="card note-card">
             <div class="note-header">

@@ -46,7 +46,6 @@ export interface User {
   avatar: string;
 }
 
-/** Library entry returned by GET /api/library/ */
 export interface LibraryEntry {
   id: number;
   game: Game;

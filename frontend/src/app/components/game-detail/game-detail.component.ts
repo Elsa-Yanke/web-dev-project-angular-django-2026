@@ -55,7 +55,6 @@ export class GameDetailComponent implements OnInit {
     return game.cover_image ? `covers/${game.cover_image}` : '';
   }
 
-  // ── Favorite ──────────────────────────────────────────────
   toggleFavorite(): void {
     const entry = this.libraryEntry();
     if (!entry) return;
@@ -65,7 +64,6 @@ export class GameDetailComponent implements OnInit {
     });
   }
 
-  // ── Note ──────────────────────────────────────────────────
   saveNote(): void {
     const entry = this.libraryEntry();
     if (!entry) return;
@@ -82,7 +80,6 @@ export class GameDetailComponent implements OnInit {
     this.noteText.set(this.libraryEntry()?.note || '');
   }
 
-  // ── Review ────────────────────────────────────────────────
   sendReview(): void {
     const g = this.game();
     if (!this.reviewText().trim() || !g) return;

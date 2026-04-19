@@ -22,7 +22,6 @@ export class AuthService {
     );
   }
 
-  /** Register and auto-login (save tokens immediately). */
   register(payload: { username: string; email: string; password: string; password2: string }) {
     return this.api.register(payload).pipe(
       tap(tokens => {
@@ -36,7 +35,6 @@ export class AuthService {
   logout(): void {
     const refresh = this.getRefreshToken();
     if (refresh) {
-      // Blacklist the refresh token on the server (fire-and-forget)
       this.api.logout(refresh).subscribe({ error: () => {} });
     }
     localStorage.removeItem(this.ACCESS_KEY);

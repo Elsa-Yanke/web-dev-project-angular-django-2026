@@ -3,7 +3,6 @@
   margin: 0 auto;
 }
 
-/* Header */
 .catalog-header {
   margin-bottom: 28px;
 }
@@ -25,7 +24,6 @@
   letter-spacing: 0.01em;
 }
 
-/* Genre chips */
 .genre-selector {
   display: flex;
   flex-wrap: wrap;
