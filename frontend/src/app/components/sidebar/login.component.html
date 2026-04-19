@@ -18,11 +18,11 @@
 
       <div class="form-group">
         <label>Username</label>
-        <input type="text" [value]="loginUsername()" (input)="loginUsername.set($any($event.target).value)" placeholder="Enter your username">
+        <input type="text" [(ngModel)]="loginUsername" name="loginUsername" placeholder="Enter your username">
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" [value]="loginPassword()" (input)="loginPassword.set($any($event.target).value)" placeholder="••••••••">
+        <input type="password" [(ngModel)]="loginPassword" name="loginPassword" placeholder="••••••••">
       </div>
       <button type="button" class="btn-login" (click)="login()">Sign In</button>
     }
@@ -41,19 +41,19 @@
 
       <div class="form-group">
         <label>Username</label>
-        <input type="text" [value]="regUsername()" (input)="regUsername.set($any($event.target).value)" placeholder="Choose a username">
+        <input type="text" [(ngModel)]="regUsername" name="regUsername" placeholder="Choose a username">
       </div>
       <div class="form-group">
         <label>Email</label>
-        <input type="email" [value]="regEmail()" (input)="regEmail.set($any($event.target).value)" placeholder="your@email.com">
+        <input type="email" [(ngModel)]="regEmail" name="regEmail" placeholder="your@email.com">
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" [value]="regPassword()" (input)="regPassword.set($any($event.target).value)" placeholder="Min. 8 characters">
+        <input type="password" [(ngModel)]="regPassword" name="regPassword" placeholder="Min. 8 characters">
       </div>
       <div class="form-group">
         <label>Confirm password</label>
-        <input type="password" [value]="regPassword2()" (input)="regPassword2.set($any($event.target).value)" placeholder="Repeat password">
+        <input type="password" [(ngModel)]="regPassword2" name="regPassword2" placeholder="Repeat password">
       </div>
       <button type="button" class="btn-login" (click)="register()">Create Account</button>
     }

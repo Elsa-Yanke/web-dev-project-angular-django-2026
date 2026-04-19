@@ -14,14 +14,15 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   mode = signal<'login' | 'register'>('login');
 
-  loginUsername = signal('');
-  loginPassword = signal('');
+  // Two-way bound with [(ngModel)]
+  loginUsername = '';
+  loginPassword = '';
   loginError = signal('');
 
-  regUsername = signal('');
-  regEmail = signal('');
-  regPassword = signal('');
-  regPassword2 = signal('');
+  regUsername = '';
+  regEmail = '';
+  regPassword = '';
+  regPassword2 = '';
   regError = signal('');
   regSuccess = signal('');
 
@@ -36,11 +37,11 @@ export class LoginComponent {
 
   login(): void {
     this.loginError.set('');
-    if (!this.loginUsername() || !this.loginPassword()) {
+    if (!this.loginUsername || !this.loginPassword) {
       this.loginError.set('Please fill in all fields.');
       return;
     }
-    this.auth.login(this.loginUsername(), this.loginPassword()).subscribe({
+    this.auth.login(this.loginUsername, this.loginPassword).subscribe({
       next: () => this.router.navigate(['/games']),
       error: (err) => {
         this.loginError.set(
@@ -55,10 +56,10 @@ export class LoginComponent {
   register(): void {
     this.regError.set('');
     this.regSuccess.set('');
-    const username = this.regUsername();
-    const email = this.regEmail();
-    const password = this.regPassword();
-    const password2 = this.regPassword2();
+    const username = this.regUsername;
+    const email = this.regEmail;
+    const password = this.regPassword;
+    const password2 = this.regPassword2;
 
     if (!username || !email || !password || !password2) {
       this.regError.set('Please fill in all fields.');
