@@ -62,7 +62,7 @@ class ReviewListCreateView(APIView):
 
 class ReviewDetailView(APIView):
     def get_permissions(self):
-        if self.request.method == 'DELETE':
+        if self.request.method in ['DELETE', 'PATCH']:
             return [IsAuthenticated()]
         return [AllowAny()]
 
@@ -72,6 +72,19 @@ class ReviewDetailView(APIView):
     def get(self, request, game_pk, pk):
         review = self.get_object(game_pk, pk)
         return Response(ReviewSerializer(review).data)
+    
+    def patch(self, request, game_pk, pk):
+        review = self.get_object(game_pk, pk)
+        if review.user != request.user:
+            return Response(
+                {'detail': 'You can change only your own reviews.'},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+        serializer = ReviewSerializer(review, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, game_pk, pk):
         review = self.get_object(game_pk, pk)
@@ -121,7 +134,6 @@ class LibraryDetailView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, pk):
-        """Accept PATCH for partial updates (e.g. status only)."""
         return self.put(request, pk)
 
     def delete(self, request, pk):
