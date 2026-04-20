@@ -53,7 +53,6 @@ export class ProfileComponent implements OnInit {
     const fd = new FormData();
     fd.append('bio', this.bioText());
     if (this.pendingAvatar) fd.append('avatar', this.pendingAvatar);
-    // Use ProfileService.update() so the sidebar avatar signal updates immediately
     this.profileService.update(fd).then((data) => {
       this.profile.set(data);
       this.editingBio.set(false);

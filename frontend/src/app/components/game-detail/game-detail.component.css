@@ -597,7 +597,6 @@
   gap: 8px;
 }
 
-/* ── LOADER ───────────────────────────────────────────────── */
 .loader {
   display: flex;
   flex-direction: column;

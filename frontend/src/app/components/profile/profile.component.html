@@ -1,11 +1,9 @@
 <div class="profile-page">
   @if (profile(); as p) {
 
-    <!-- ── Header ── -->
     <div class="profile-header">
       <div class="avatar-section">
         @if (editingBio()) {
-          <!-- Clickable in edit mode -->
           <label class="avatar-wrap" for="avatarInput">
             @if (avatarPreview() || profileService.avatarUrl()) {
               <img [src]="avatarPreview() || profileService.avatarUrl()" class="avatar-img" alt="avatar">
@@ -18,7 +16,6 @@
           </label>
           <input id="avatarInput" type="file" accept="image/*" (change)="onAvatarSelected($event)" hidden>
         } @else {
-          <!-- Static display outside edit mode -->
           <div class="avatar-wrap no-click">
             @if (profileService.avatarUrl()) {
               <img [src]="profileService.avatarUrl()" class="avatar-img" alt="avatar">
@@ -47,8 +44,6 @@
         }
       </div>
     </div>
-
-    <!-- ── Favorites ── -->
     <section class="favorites-section">
       <h2>Favourite Games</h2>
 

@@ -30,7 +30,6 @@ export class GameCardComponent {
     img.style.display = 'none';
   }
 
-  /** Returns the image path: local covers folder if set, otherwise nothing */
   get coverSrc(): string {
     if (this.game.cover_image) {
       return `covers/${this.game.cover_image}`;
